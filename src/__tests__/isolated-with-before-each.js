@@ -1,17 +1,15 @@
-import 'jest-dom/extend-expect'
+import '@testing-library/jest-dom/extend-expect'
 import React from 'react'
-import {renderIntoDocument, cleanup, fireEvent} from 'react-testing-library'
+import {render, fireEvent} from '@testing-library/react'
 import {Counter} from '../counter'
 
 let getByText, counterButton
 
 beforeEach(() => {
-  const utils = renderIntoDocument(<Counter maxClicks={4} initialCount={3} />)
+  const utils = render(<Counter maxClicks={4} initialCount={3} />)
   getByText = utils.getByText
   counterButton = utils.getByText(/^count/i)
 })
-
-afterEach(cleanup)
 
 test('the counter is initialized to the initialCount', () => {
   expect(counterButton).toHaveTextContent(/3/)

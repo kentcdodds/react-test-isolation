@@ -1,14 +1,10 @@
-import 'jest-dom/extend-expect'
+import '@testing-library/jest-dom/extend-expect'
 import React from 'react'
-import {renderIntoDocument, cleanup, fireEvent} from 'react-testing-library'
+import {render, fireEvent} from '@testing-library/react'
 import {Counter} from '../counter'
 
-afterEach(cleanup)
-
 test('allows clicks until the maxClicks is reached, then requires a reset', () => {
-  const {getByText} = renderIntoDocument(
-    <Counter maxClicks={4} initialCount={3} />,
-  )
+  const {getByText} = render(<Counter maxClicks={4} initialCount={3} />)
   const counterButton = getByText(/^count/i)
 
   // the counter is initialized to the initialCount
